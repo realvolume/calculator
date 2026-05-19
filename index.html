@@ -192,23 +192,26 @@
     .season-card:hover::before,
     .season-card.active::before { opacity: 1; }
 
-    /* large ghost emoji — background decoration */
+    /* SVG mesh illustration — background decoration */
     .card-emoji-bg {
       position: absolute;
-      right: -10px;
+      right: -14px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 110px;
-      line-height: 1;
-      opacity: 0.13;
+      width: 110px;
+      height: 110px;
+      opacity: 0.35;
       pointer-events: none;
       transition: opacity 0.35s ease, transform 0.35s ease;
-      filter: grayscale(20%);
       user-select: none;
+    }
+    .card-emoji-bg svg {
+      width: 100%;
+      height: 100%;
     }
     .season-card:hover .card-emoji-bg,
     .season-card.active .card-emoji-bg {
-      opacity: 0.22;
+      opacity: 0.6;
       transform: translateY(-50%) scale(1.07);
     }
 
@@ -868,14 +871,17 @@
   </footer>
 
   <script>
+    const GRID = `<g stroke="#4AADFF" stroke-width="1" opacity="0.55"><line x1="0" y1="20" x2="120" y2="20"/><line x1="0" y1="40" x2="120" y2="40"/><line x1="0" y1="60" x2="120" y2="60"/><line x1="0" y1="80" x2="120" y2="80"/><line x1="0" y1="100" x2="120" y2="100"/><line x1="20" y1="0" x2="20" y2="120"/><line x1="40" y1="0" x2="40" y2="120"/><line x1="60" y1="0" x2="60" y2="120"/><line x1="80" y1="0" x2="80" y2="120"/><line x1="100" y1="0" x2="100" y2="120"/></g>`;
+    const GR = (id) => `<defs><radialGradient id="${id}" cx="35%" cy="28%" r="70%"><stop offset="0%" stop-color="#8de0ff"/><stop offset="50%" stop-color="#4AADFF"/><stop offset="100%" stop-color="#062a5e"/></radialGradient></defs>`;
+
     const SEASONS = [
-      { emoji: '🎃', name: 'Halloween',         date: '2026-10-31', note: null },
-      { emoji: '💀', name: 'Día de Muertos',    date: '2026-11-02', note: null },
-      { emoji: '🎄', name: 'Christmas',          date: '2026-12-25', note: null },
-      { emoji: '💝', name: "Valentine's Day",   date: '2027-02-14', note: null },
-      { emoji: '🐣', name: 'Easter',             date: '2027-03-28', note: null },
-      { emoji: '💐', name: "Mother's Day",       date: '2027-05-10', note: 'May 10 Mexico · 2nd Sunday May EU & USA' },
-      { emoji: '🍫', name: 'World Chocolate Day',date: '2026-07-07', note: null },
+      { emoji: '🍫', name: 'World Chocolate Day', date: '2026-07-07', note: null, svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g6')}${GRID}<path d="M20 42 L60 30 L100 42 L100 82 L60 94 L20 82Z" fill="url(#g6)"/><path d="M60 30 L100 42 L100 82 L60 94Z" fill="#1a6fcc" opacity="0.5"/><path d="M60 30 L100 42 L60 54 L20 42Z" fill="#8de0ff" opacity="0.25"/><line x1="20" y1="55" x2="100" y2="55" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="20" y1="68" x2="100" y2="68" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="20" y1="81" x2="100" y2="81" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="40" y1="37" x2="40" y2="94" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="60" y1="30" x2="60" y2="94" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="80" y1="37" x2="80" y2="88" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><ellipse cx="38" cy="42" rx="9" ry="5" fill="white" opacity="0.2" transform="rotate(-15 38 42)"/></svg>` },
+      { emoji: '🎃', name: 'Halloween', date: '2026-10-31', note: null, svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g0')}${GRID}<ellipse cx="37" cy="76" rx="19" ry="24" fill="url(#g0)" opacity="0.75"/><ellipse cx="83" cy="76" rx="19" ry="24" fill="url(#g0)" opacity="0.75"/><ellipse cx="60" cy="73" rx="26" ry="31" fill="url(#g0)"/><path d="M57 44 Q62 33 71 29" stroke="#4AADFF" stroke-width="4" fill="none" stroke-linecap="round"/><polygon points="51,68 46,59 57,59" fill="#041e42" opacity="0.7"/><polygon points="69,68 74,59 63,59" fill="#041e42" opacity="0.7"/><path d="M49 78 Q60 87 71 78" stroke="#041e42" stroke-width="2.5" fill="none" opacity="0.7"/><ellipse cx="50" cy="59" rx="8" ry="5" fill="white" opacity="0.2" transform="rotate(-20 50 59)"/></svg>` },
+      { emoji: '💀', name: 'Día de Muertos', date: '2026-11-02', note: null, svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g1')}${GRID}<ellipse cx="60" cy="54" rx="33" ry="36" fill="url(#g1)"/><rect x="38" y="78" width="44" height="24" rx="11" fill="url(#g1)"/><ellipse cx="47" cy="52" rx="11" ry="12" fill="#041e42" opacity="0.75"/><ellipse cx="73" cy="52" rx="11" ry="12" fill="#041e42" opacity="0.75"/><ellipse cx="43" cy="48" rx="3" ry="2.5" fill="white" opacity="0.3"/><ellipse cx="69" cy="48" rx="3" ry="2.5" fill="white" opacity="0.3"/><path d="M55 67 L60 73 L65 67" fill="#041e42" opacity="0.6"/><line x1="48" y1="80" x2="48" y2="97" stroke="#041e42" stroke-width="2.5" opacity="0.55"/><line x1="56" y1="80" x2="56" y2="99" stroke="#041e42" stroke-width="2.5" opacity="0.55"/><line x1="64" y1="80" x2="64" y2="99" stroke="#041e42" stroke-width="2.5" opacity="0.55"/><line x1="72" y1="80" x2="72" y2="97" stroke="#041e42" stroke-width="2.5" opacity="0.55"/><circle cx="60" cy="22" r="5" fill="#4AADFF" opacity="0.6"/><circle cx="47" cy="26" r="3.5" fill="#4AADFF" opacity="0.45"/><circle cx="73" cy="26" r="3.5" fill="#4AADFF" opacity="0.45"/><ellipse cx="49" cy="42" rx="9" ry="5" fill="white" opacity="0.18" transform="rotate(-20 49 42)"/></svg>` },
+      { emoji: '🎄', name: 'Christmas', date: '2026-12-25', note: null, svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g2')}${GRID}<circle cx="60" cy="72" r="35" fill="url(#g2)"/><rect x="54" y="32" width="12" height="14" rx="4" fill="#1a6fcc"/><path d="M60 32 Q60 20 68 18" stroke="#4AADFF" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M28 65 Q60 55 92 65" stroke="white" stroke-width="1.5" fill="none" opacity="0.25"/><path d="M27 72 Q60 62 93 72" stroke="white" stroke-width="1.5" fill="none" opacity="0.25"/><circle cx="60" cy="72" r="2" fill="white" opacity="0.4"/><circle cx="45" cy="62" r="1.5" fill="white" opacity="0.3"/><circle cx="75" cy="62" r="1.5" fill="white" opacity="0.3"/><circle cx="50" cy="82" r="1.5" fill="white" opacity="0.3"/><circle cx="70" cy="82" r="1.5" fill="white" opacity="0.3"/><ellipse cx="48" cy="58" rx="9" ry="6" fill="white" opacity="0.2" transform="rotate(-20 48 58)"/></svg>` },
+      { emoji: '💝', name: "Valentine's Day", date: '2027-02-14', note: null, svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g3')}${GRID}<path d="M60 95 C60 95 20 72 20 48 C20 34 30 26 40 26 C50 26 56 32 60 38 C64 32 70 26 80 26 C90 26 100 34 100 48 C100 72 60 95 60 95Z" fill="url(#g3)"/><ellipse cx="46" cy="42" rx="10" ry="7" fill="white" opacity="0.22" transform="rotate(-35 46 42)"/></svg>` },
+      { emoji: '🐣', name: 'Easter', date: '2027-03-28', note: null, svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g4')}${GRID}<ellipse cx="60" cy="65" rx="30" ry="38" fill="url(#g4)"/><path d="M31 62 Q60 52 89 62" stroke="white" stroke-width="12" fill="none" opacity="0.1"/><circle cx="50" cy="50" r="2.5" fill="white" opacity="0.3"/><circle cx="66" cy="46" r="2" fill="white" opacity="0.25"/><circle cx="55" cy="76" r="2.5" fill="white" opacity="0.3"/><circle cx="68" cy="73" r="2" fill="white" opacity="0.25"/><circle cx="45" cy="72" r="2" fill="white" opacity="0.25"/><ellipse cx="47" cy="50" rx="9" ry="6" fill="white" opacity="0.2" transform="rotate(-20 47 50)"/></svg>` },
+      { emoji: '💐', name: "Mother's Day", date: '2027-05-10', note: 'May 10 Mexico · 2nd Sunday May EU & USA', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><defs><radialGradient id="g5" cx="35%" cy="28%" r="70%"><stop offset="0%" stop-color="#8de0ff"/><stop offset="50%" stop-color="#4AADFF"/><stop offset="100%" stop-color="#062a5e"/></radialGradient><radialGradient id="g5b" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#a0d8ff"/><stop offset="100%" stop-color="#1a6fcc"/></radialGradient></defs>${GRID}<ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(0 60 62)"/><ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(72 60 62)"/><ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(144 60 62)"/><ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(216 60 62)"/><ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(288 60 62)"/><circle cx="60" cy="62" r="17" fill="url(#g5b)"/><ellipse cx="55" cy="57" rx="5" ry="3.5" fill="white" opacity="0.3" transform="rotate(-20 55 57)"/></svg>` },
     ];
 
     const TRADITIONAL_DAYS = 40;
@@ -923,7 +929,7 @@
       const card = document.createElement('div');
       card.className = 'season-card';
       card.innerHTML = `
-        <span class="card-emoji-bg" aria-hidden="true">${s.emoji}</span>
+        <span class="card-emoji-bg" aria-hidden="true">${s.svg}</span>
         <span class="card-arrow" aria-hidden="true">›</span>
         <div class="card-info">
           <p class="card-name">
