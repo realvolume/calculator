@@ -78,32 +78,36 @@
     }
 
     /* ── HERO ── */
+    .header-bg {
+      position: relative;
+      overflow: hidden;
+    }
+    .header-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('chocolatedesigneditado.jpg') center center / cover no-repeat;
+      opacity: 0.38;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .header-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(9,13,24,0.35) 0%, rgba(9,13,24,0.05) 40%, rgba(9,13,24,0.6) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .header-bg > * {
+      position: relative;
+      z-index: 1;
+    }
+
     .hero {
       text-align: center;
       padding: 72px 24px 56px;
       position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url('../chocolatedesigneditado.png') center center / cover no-repeat;
-      opacity: 0.28;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(9,13,24,0.45) 0%, rgba(9,13,24,0.1) 40%, rgba(9,13,24,0.55) 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .hero > * {
-      position: relative;
-      z-index: 1;
     }
     .hero-eyebrow {
       font-size: 11px;
@@ -559,13 +563,10 @@
       .hero { padding: 32px 16px 32px; }
       .results-inner { padding: 28px 16px; }
       .topbar { padding: 20px 16px 0; }
-      .logo img { height: 72px; }
+      .logo img { height: 72px; width: 72px; }
       .countdown-wrap { margin-bottom: 28px; }
-      .popup-box { padding: 36px 24px 28px; }
-      .popup-title { font-size: 22px; }
       .timelines { gap: 12px; }
       .dynamic-msg { padding: 20px 20px; }
-      .calc-blocker-text { font-size: 18px; }
     }
     @media (max-width: 480px) {
       .season-card { padding: 22px 18px; min-height: 130px; }
@@ -586,189 +587,6 @@
       animation: shimmer 3s infinite linear;
     }
 
-    /* ── EMAIL POPUP ── */
-    .popup-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(9,13,24,0.85);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-    .popup-overlay.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .popup-box {
-      background: var(--surface);
-      border: 1px solid rgba(74,173,255,0.25);
-      border-radius: 24px;
-      padding: 44px 40px;
-      max-width: 460px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(74,173,255,0.1);
-      transform: translateY(16px);
-      transition: transform 0.4s ease;
-    }
-    .popup-overlay.visible .popup-box {
-      transform: translateY(0);
-    }
-    .popup-top-line {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      border-radius: 24px 24px 0 0;
-    }
-    .popup-emoji { font-size: 40px; margin-bottom: 16px; display: block; }
-    .popup-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 10px;
-      line-height: 1.2;
-    }
-    .popup-sub {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 28px;
-      line-height: 1.6;
-    }
-    .popup-input {
-      width: 100%;
-      background: var(--surface2);
-      border: 1px solid rgba(74,173,255,0.2);
-      border-radius: 99px;
-      padding: 14px 20px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-    .popup-input::placeholder { color: var(--muted); }
-    .popup-input:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(74,173,255,0.12);
-    }
-    .popup-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #4AADFF, #1a6fcc);
-      color: #050d1a;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 14px 24px;
-      border-radius: 99px;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-      box-shadow: 0 4px 20px rgba(74,173,255,0.3);
-      letter-spacing: 0.02em;
-    }
-    .popup-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(74,173,255,0.45);
-      filter: brightness(1.08);
-    }
-    .popup-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-    .popup-error {
-      font-size: 12px;
-      color: #e05a4e;
-      margin-top: 8px;
-      min-height: 18px;
-    }
-    .popup-close {
-      position: absolute;
-      top: 16px;
-      right: 18px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 22px;
-      cursor: pointer;
-      line-height: 1;
-      transition: color 0.2s ease;
-      padding: 4px;
-      z-index: 2;
-    }
-    .popup-close:hover { color: var(--text); }
-
-    /* Blocker overlay over the calculator */
-    .calc-blocker {
-      position: fixed;
-      inset: 0;
-      background: rgba(9,13,24,0.75);
-      backdrop-filter: blur(4px);
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-    .calc-blocker.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .calc-blocker-text {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(18px, 3vw, 24px);
-      color: var(--text);
-      text-align: center;
-      padding: 0 24px;
-      font-style: italic;
-    }
-    .calc-blocker-btn {
-      background: linear-gradient(135deg, #4AADFF, #1a6fcc);
-      color: #050d1a;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 14px 32px;
-      border-radius: 99px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(74,173,255,0.3);
-      transition: transform 0.2s ease, filter 0.2s ease;
-    }
-    .calc-blocker-btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.08);
-    }
-    .popup-success {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-    }
-    .popup-success-icon { font-size: 48px; margin-bottom: 16px; }
-    .popup-success-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .popup-success-sub { font-size: 14px; color: var(--muted); }
-
     /* ── FADE IN on load ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -781,17 +599,19 @@
 </head>
 <body>
 
-  <div class="topbar">
-    <a class="logo" href="https://realvolume.studio" target="_blank">
-      <img src="Insta Profile 5.png" alt="Real Volume Studio" />
-    </a>
-  </div>
+  <div class="header-bg">
+    <div class="topbar">
+      <a class="logo" href="https://realvolume.studio" target="_blank">
+        <img src="Insta Profile 5.png" alt="Real Volume Studio" />
+      </a>
+    </div>
 
-  <section class="hero wrap">
+    <section class="hero wrap">
     <p class="hero-eyebrow">Seasonal Launch Calculator</p>
     <h1>Is there still time to launch<br>your <em>next collection?</em></h1>
     <p class="hero-sub">Select your season below — we'll show you exactly where you stand.</p>
   </section>
+  </div><!-- /.header-bg -->
 
   <div class="wrap">
     <div class="divider"><span class="divider-diamond"></span></div>
@@ -847,35 +667,6 @@
     </div>
   </div>
 
-  <!-- CALC BLOCKER -->
-  <div class="calc-blocker" id="calc-blocker">
-    <p class="calc-blocker-text">Leave your email to keep exploring the calculator.</p>
-    <button class="calc-blocker-btn" id="blocker-register-btn">Register — it's free →</button>
-  </div>
-
-  <!-- EMAIL POPUP -->
-  <div class="popup-overlay" id="popup-overlay">
-    <div class="popup-box">
-      <div class="popup-top-line"></div>
-      <button class="popup-close" id="popup-close" aria-label="Close">✕</button>
-
-      <div id="popup-form-view">
-        <span class="popup-emoji">🍫</span>
-        <h2 class="popup-title">Unlock your full results</h2>
-        <p class="popup-sub">Enter your email to see your complete launch timeline and keep using the calculator for free.</p>
-        <input class="popup-input" type="email" id="popup-email" placeholder="your@email.com" autocomplete="email" />
-        <p class="popup-error" id="popup-error"></p>
-        <button class="popup-btn" id="popup-submit">See my results →</button>
-      </div>
-
-      <div id="popup-success-view" class="popup-success">
-        <span class="popup-success-icon">✅</span>
-        <p class="popup-success-title">You're in!</p>
-        <p class="popup-success-sub">Your results are ready. The calculator is all yours.</p>
-      </div>
-    </div>
-  </div>
-
   <footer>
     Real Volume Studio
     <span class="footer-dots">·</span>
@@ -902,8 +693,6 @@
 
     const TRADITIONAL_DAYS = 40;
     const RV_DAYS = 8;
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWYL7OvnNBh0GZFNF3BRQTKy9yTTgjtJpihxndBlXZBEL8t7uLVCNdHGanPDP_4mqg/exec';
-    let consultCount = 0;
 
     function parseDate(str) {
       const [y, m, d] = str.split('-').map(Number);
@@ -1065,78 +854,7 @@
       setTimeout(() => {
         results.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
-
-      // Show popup on 2nd consultation if email not saved
-      if (!localStorage.getItem('rv_lead_email')) {
-        consultCount++;
-        if (consultCount === 2) {
-          setTimeout(showPopup, 300);
-        }
-      }
     }
-
-    // ── POPUP LOGIC ──
-    function showPopup() {
-      document.getElementById('popup-overlay').classList.add('visible');
-    }
-
-    function hidePopup() {
-      document.getElementById('popup-overlay').classList.remove('visible');
-    }
-
-    document.getElementById('popup-submit').addEventListener('click', async () => {
-      const emailInput = document.getElementById('popup-email');
-      const errorEl   = document.getElementById('popup-error');
-      const btn       = document.getElementById('popup-submit');
-      const email     = emailInput.value.trim();
-
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        errorEl.textContent = 'Por favor ingresá un email válido.';
-        return;
-      }
-
-      errorEl.textContent = '';
-      btn.disabled = true;
-      btn.textContent = 'Sending...';
-
-      try {
-        await fetch(SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, season: document.getElementById('res-name').textContent || 'unknown' })
-        });
-      } catch (_) {}
-
-      localStorage.setItem('rv_lead_email', email);
-
-      document.getElementById('popup-form-view').style.display = 'none';
-      const successView = document.getElementById('popup-success-view');
-      successView.style.display = 'flex';
-
-      setTimeout(hidePopup, 2200);
-    });
-
-    document.getElementById('popup-close').addEventListener('click', () => {
-      hidePopup();
-      document.getElementById('calc-blocker').classList.add('visible');
-    });
-
-    document.getElementById('blocker-register-btn').addEventListener('click', () => {
-      document.getElementById('calc-blocker').classList.remove('visible');
-      // reset form in case it was used before
-      document.getElementById('popup-form-view').style.display = '';
-      document.getElementById('popup-success-view').style.display = 'none';
-      document.getElementById('popup-email').value = '';
-      document.getElementById('popup-error').textContent = '';
-      document.getElementById('popup-submit').disabled = false;
-      document.getElementById('popup-submit').textContent = 'See my results →';
-      showPopup();
-    });
-
-    document.getElementById('popup-email').addEventListener('keydown', e => {
-      if (e.key === 'Enter') document.getElementById('popup-submit').click();
-    });
   </script>
 </body>
 </html>
