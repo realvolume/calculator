@@ -595,6 +595,94 @@
     .hero         { animation: fadeUp 0.7s ease both; }
     .seasons-label{ animation: fadeUp 0.7s 0.15s ease both; }
     .seasons-grid { animation: fadeUp 0.7s 0.25s ease both; }
+
+    /* ── LEAD POPUP ── */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(9,13,24,0.82);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .popup-overlay.active { display: flex; }
+    .popup-box {
+      background: var(--surface);
+      border: 1px solid rgba(74,173,255,0.25);
+      border-radius: 20px;
+      padding: 40px 36px 36px;
+      max-width: 440px;
+      width: 100%;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+    }
+    .popup-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      background: none; border: none;
+      color: var(--muted); font-size: 20px;
+      cursor: pointer; line-height: 1;
+    }
+    .popup-icon { font-size: 40px; margin-bottom: 12px; display: block; }
+    .popup-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; font-weight: 700;
+      color: var(--text); margin-bottom: 10px;
+    }
+    .popup-sub {
+      font-size: 15px; color: var(--muted);
+      line-height: 1.55; margin-bottom: 24px;
+    }
+    .popup-input {
+      width: 100%; padding: 14px 18px;
+      background: var(--surface2);
+      border: 1px solid rgba(74,173,255,0.2);
+      border-radius: 10px; color: var(--text);
+      font-size: 15px; font-family: 'DM Sans', sans-serif;
+      outline: none; margin-bottom: 8px;
+    }
+    .popup-input:focus { border-color: var(--gold); }
+    .popup-error { font-size: 13px; color: var(--danger); margin-bottom: 10px; min-height: 18px; }
+    .popup-btn {
+      width: 100%; padding: 15px;
+      background: var(--gold); border: none;
+      border-radius: 10px; color: #090d18;
+      font-size: 16px; font-weight: 600;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      transition: opacity 0.2s;
+    }
+    .popup-btn:hover { opacity: 0.88; }
+    .popup-success { display: none; }
+    .popup-success p { color: var(--text); font-size: 16px; line-height: 1.5; }
+
+    /* ── CALC BLOCKER ── */
+    .calc-blocker {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(9,13,24,0.7);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      padding: 24px;
+    }
+    .calc-blocker.active { display: flex; }
+    .blocker-text { color: var(--text); font-size: 18px; font-weight: 500; }
+    .blocker-btn {
+      padding: 13px 28px;
+      background: var(--gold); border: none;
+      border-radius: 10px; color: #090d18;
+      font-size: 15px; font-weight: 600;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+    }
   </style>
 </head>
 <body>
@@ -667,6 +755,31 @@
     </div>
   </div>
 
+  <!-- LEAD POPUP -->
+  <div class="popup-overlay" id="popup-overlay">
+    <div class="popup-box">
+      <button class="popup-close" id="popup-close">✕</button>
+      <div id="popup-form-view">
+        <span class="popup-icon">🍫</span>
+        <h2 class="popup-title">Unlock your full results</h2>
+        <p class="popup-sub">Enter your email to see your complete launch timeline and keep using the calculator for free.</p>
+        <input class="popup-input" type="email" id="popup-email" placeholder="your@email.com" />
+        <p class="popup-error" id="popup-error"></p>
+        <button class="popup-btn" id="popup-submit">See my results →</button>
+      </div>
+      <div class="popup-success" id="popup-success">
+        <span class="popup-icon">✅</span>
+        <p>¡Listo! Ya podés seguir explorando la calculadora.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALC BLOCKER -->
+  <div class="calc-blocker" id="calc-blocker">
+    <p class="blocker-text">Leave your email to keep exploring the calculator.</p>
+    <button class="blocker-btn" id="blocker-btn">Register — it's free →</button>
+  </div>
+
   <footer>
     Real Volume Studio
     <span class="footer-dots">·</span>
@@ -678,6 +791,9 @@
   </footer>
 
   <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWYL7OvnNBh0GZFNF3BRQTKy9yTTgjtJpihxndBlXZBEL8t7uLVCNdHGanPDP_4mqg/exec';
+    let consultCount = 0;
+
     const GRID = `<g stroke="#4AADFF" stroke-width="1" opacity="0.55"><line x1="0" y1="20" x2="120" y2="20"/><line x1="0" y1="40" x2="120" y2="40"/><line x1="0" y1="60" x2="120" y2="60"/><line x1="0" y1="80" x2="120" y2="80"/><line x1="0" y1="100" x2="120" y2="100"/><line x1="20" y1="0" x2="20" y2="120"/><line x1="40" y1="0" x2="40" y2="120"/><line x1="60" y1="0" x2="60" y2="120"/><line x1="80" y1="0" x2="80" y2="120"/><line x1="100" y1="0" x2="100" y2="120"/></g>`;
     const GR = (id) => `<defs><radialGradient id="${id}" cx="35%" cy="28%" r="70%"><stop offset="0%" stop-color="#8de0ff"/><stop offset="50%" stop-color="#4AADFF"/><stop offset="100%" stop-color="#062a5e"/></radialGradient></defs>`;
 
@@ -753,6 +869,11 @@
     let activeCard = null;
 
     function selectSeason(index, card) {
+      if (!localStorage.getItem('rv_lead_email')) {
+        consultCount++;
+        if (consultCount === 2) setTimeout(showPopup, 300);
+      }
+
       // Toggle active card
       if (activeCard) activeCard.classList.remove('active');
       activeCard = card;
@@ -855,6 +976,44 @@
         results.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     }
+    // ── POPUP ──
+    function showPopup() {
+      document.getElementById('popup-overlay').classList.add('active');
+    }
+    function hidePopup() {
+      document.getElementById('popup-overlay').classList.remove('active');
+    }
+
+    document.getElementById('popup-close').addEventListener('click', () => {
+      hidePopup();
+      document.getElementById('calc-blocker').classList.add('active');
+    });
+
+    document.getElementById('blocker-btn').addEventListener('click', () => {
+      document.getElementById('calc-blocker').classList.remove('active');
+      showPopup();
+    });
+
+    document.getElementById('popup-submit').addEventListener('click', () => {
+      const email = document.getElementById('popup-email').value.trim();
+      const errEl = document.getElementById('popup-error');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errEl.textContent = 'Por favor ingresá un email válido.';
+        return;
+      }
+      errEl.textContent = '';
+      const season = SEASONS[0]?.name || '';
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, season })
+      });
+      localStorage.setItem('rv_lead_email', email);
+      document.getElementById('popup-form-view').style.display = 'none';
+      document.getElementById('popup-success').style.display = 'block';
+      setTimeout(hidePopup, 2200);
+    });
   </script>
 </body>
 </html>
