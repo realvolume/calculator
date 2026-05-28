@@ -804,6 +804,7 @@
       <div class="popup-success" id="popup-success">
         <span class="popup-icon">✅</span>
         <p>You're all set! Keep exploring the calculator.</p>
+        <button class="popup-btn" id="popup-success-btn" style="margin-top:18px;">Start exploring →</button>
       </div>
     </div>
   </div>
@@ -1049,7 +1050,8 @@
       localStorage.setItem('rv_lead_email', email);
       document.getElementById('popup-form-view').style.display = 'none';
       document.getElementById('popup-success').style.display = 'block';
-      setTimeout(hidePopup, 2200);
+      document.getElementById('popup-success-btn').addEventListener('click', hidePopup);
+      setTimeout(hidePopup, 4000);
     });
   </script>
 </body>
