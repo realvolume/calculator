@@ -110,12 +110,13 @@
       position: relative;
     }
     .hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.22em;
+      font-size: 14px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 24px;
-      font-weight: 500;
+      font-weight: 700;
+      font-family: 'Baloo 2', sans-serif;
     }
     .hero h1 {
       font-family: 'Baloo 2', sans-serif;
@@ -161,11 +162,13 @@
     /* ── SEASON GRID ── */
     .seasons-label {
       text-align: center;
-      font-size: 11px;
-      letter-spacing: 0.2em;
+      font-size: 14px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 28px;
+      font-weight: 700;
+      font-family: 'Baloo 2', sans-serif;
     }
 
     .seasons-grid {
@@ -401,12 +404,13 @@
     .timeline-card.good { border-color: rgba(46,204,113,0.3); }
 
     .timeline-title {
-      font-size: 11px;
-      letter-spacing: 0.15em;
+      font-size: 14px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 18px;
-      font-weight: 500;
+      font-weight: 700;
+      font-family: 'Baloo 2', sans-serif;
     }
 
     /* Hero value — the big actionable number or date */
@@ -471,10 +475,11 @@
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted);
       margin-top: 8px;
-      opacity: 0.7;
+      font-weight: 700;
     }
+    .timeline-process-tag.slow { color: #ff5c5c; }
+    .timeline-process-tag.fast { color: #4cde80; }
 
     /* ── DYNAMIC MESSAGE ── */
     .dynamic-msg {
@@ -754,7 +759,7 @@
             <p class="timeline-hero-sub" id="trad-hero-sub"></p>
             <div class="bar-track"><div class="bar-fill" id="bar-trad"></div></div>
             <p class="timeline-verdict" id="verdict-trad"></p>
-            <p class="timeline-process-tag">Requires 4+ months</p>
+            <p class="timeline-process-tag slow">Requires 4+ months</p>
           </div>
           <!-- VS -->
           <div class="vs-divider">VS</div>
@@ -766,7 +771,7 @@
             <p class="timeline-hero-sub" id="rv-hero-sub"></p>
             <div class="bar-track"><div class="bar-fill" id="bar-rv"></div></div>
             <p class="timeline-verdict" id="verdict-rv"></p>
-            <p class="timeline-process-tag">Only 8 days</p>
+            <p class="timeline-process-tag fast">Only 8 days</p>
           </div>
         </div>
 
