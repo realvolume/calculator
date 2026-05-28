@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seasonal Launch Calculator — Real Volume Studio</title>
+  <title>Seasonal Design Calculator — Real Volume Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -350,18 +350,42 @@
     }
     .countdown-season-name {
       font-family: 'Playfair Display', serif;
-      font-size: 22px;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
       color: var(--text);
-      margin-top: 6px;
+      margin-bottom: 10px;
       font-style: italic;
+      line-height: 1.1;
     }
 
     /* ── TIMELINE BARS ── */
     .timelines {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
       margin-bottom: 36px;
+      align-items: center;
+    }
+    .vs-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      gap: 6px;
+    }
+    .vs-divider::before,
+    .vs-divider::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, rgba(74,173,255,0.2), transparent);
     }
 
     .timeline-card {
@@ -416,8 +440,8 @@
 
     /* Progress bar */
     .bar-track {
-      height: 5px;
-      background: rgba(255,255,255,0.06);
+      height: 14px;
+      background: rgba(255,255,255,0.07);
       border-radius: 99px;
       margin-bottom: 16px;
       overflow: hidden;
@@ -427,6 +451,7 @@
       border-radius: 99px;
       transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       width: 0;
+      min-width: 18px;
     }
     .timeline-card.bad  .bar-fill { background: linear-gradient(90deg, #c0392b, #e74c3c); }
     .timeline-card.good .bar-fill { background: linear-gradient(90deg, #1a6fcc, var(--gold)); }
@@ -565,7 +590,9 @@
       .topbar { padding: 20px 16px 0; }
       .logo img { height: 72px; width: 72px; }
       .countdown-wrap { margin-bottom: 28px; }
-      .timelines { gap: 12px; }
+      .timelines { grid-template-columns: 1fr; gap: 0; }
+      .vs-divider { flex-direction: row; padding: 16px 0; height: auto; gap: 16px; }
+      .vs-divider::before, .vs-divider::after { width: 40px; height: 1px; }
       .dynamic-msg { padding: 20px 20px; }
     }
     @media (max-width: 480px) {
@@ -695,8 +722,8 @@
     </div>
 
     <section class="hero wrap">
-    <p class="hero-eyebrow">Seasonal Launch Calculator</p>
-    <h1>Is there still time to launch<br>your <em>next collection?</em></h1>
+    <p class="hero-eyebrow">Seasonal Design Calculator</p>
+    <h1>Is there still time to design<br>your <em>next seasonal collection?</em></h1>
     <p class="hero-sub">Select your season below — we'll show you exactly where you stand.</p>
   </section>
   </div><!-- /.header-bg -->
@@ -712,10 +739,10 @@
       <div class="results-inner">
         <div class="countdown-wrap">
           <span class="countdown-season-emoji" id="res-emoji"></span>
+          <p class="countdown-season-name" id="res-name"></p>
           <p class="countdown-label">Days remaining until</p>
           <div class="countdown-number" id="res-days"></div>
           <p class="countdown-unit">days</p>
-          <p class="countdown-season-name" id="res-name"></p>
         </div>
 
         <div class="timelines">
@@ -727,8 +754,10 @@
             <p class="timeline-hero-sub" id="trad-hero-sub"></p>
             <div class="bar-track"><div class="bar-fill" id="bar-trad"></div></div>
             <p class="timeline-verdict" id="verdict-trad"></p>
-            <p class="timeline-process-tag">Requires 40+ days</p>
+            <p class="timeline-process-tag">Requires 4+ months</p>
           </div>
+          <!-- VS -->
+          <div class="vs-divider">VS</div>
           <!-- Real Volume -->
           <div class="timeline-card good" id="tl-rv">
             <p class="timeline-title">Real Volume Studio</p>
@@ -747,7 +776,7 @@
 
         <div class="cta-wrap">
           <a id="cta-btn" href="https://wa.me/5491130006749" target="_blank" class="cta-btn">
-            <span id="cta-text">Start your collection</span>
+            <span id="cta-text">Book my design today</span>
             <span class="btn-arrow">→</span>
           </a>
         </div>
@@ -762,10 +791,10 @@
       <div id="popup-form-view">
         <span class="popup-icon">🍫</span>
         <h2 class="popup-title">Unlock your full results</h2>
-        <p class="popup-sub">Enter your email to see your complete launch timeline and keep using the calculator for free.</p>
+        <p class="popup-sub">Enter your email to see your complete design timeline and keep using the calculator for free.</p>
         <input class="popup-input" type="email" id="popup-email" placeholder="your@email.com" />
         <p class="popup-error" id="popup-error"></p>
-        <button class="popup-btn" id="popup-submit">See my results →</button>
+        <button class="popup-btn" id="popup-submit">Unlock results →</button>
       </div>
       <div class="popup-success" id="popup-success">
         <span class="popup-icon">✅</span>
@@ -788,6 +817,8 @@
     <a href="mailto:hello@realvolume.studio">hello@realvolume.studio</a>
     <span class="footer-dots">·</span>
     <a href="https://wa.me/5491130006749" target="_blank">WhatsApp</a>
+    <span class="footer-dots">·</span>
+    <a href="https://www.linkedin.com/company/realvolumestudio" target="_blank">LinkedIn</a>
   </footer>
 
   <script>
@@ -798,6 +829,7 @@
     const GR = (id) => `<defs><radialGradient id="${id}" cx="35%" cy="28%" r="70%"><stop offset="0%" stop-color="#8de0ff"/><stop offset="50%" stop-color="#4AADFF"/><stop offset="100%" stop-color="#062a5e"/></radialGradient></defs>`;
 
     const SEASONS = [
+      { emoji: '⚽', name: 'World Cup 2026', date: '2026-07-19', note: 'Tournament window: June 11 – July 19 · USA, Canada & Mexico', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g7')}${GRID}<circle cx="60" cy="60" r="36" fill="url(#g7)"/><polygon points="60,30 72,39 68,53 52,53 48,39" fill="#041e42" opacity="0.55"/><polygon points="88,52 96,63 90,75 78,72 76,58" fill="#041e42" opacity="0.45"/><polygon points="32,52 24,63 30,75 42,72 44,58" fill="#041e42" opacity="0.45"/><polygon points="72,84 62,92 48,88 48,75 62,70 74,75" fill="#041e42" opacity="0.45"/><line x1="60" y1="30" x2="72" y2="39" stroke="#4AADFF" stroke-width="1" opacity="0.6"/><line x1="72" y1="39" x2="68" y2="53" stroke="#4AADFF" stroke-width="1" opacity="0.6"/><line x1="68" y1="53" x2="52" y2="53" stroke="#4AADFF" stroke-width="1" opacity="0.6"/><line x1="52" y1="53" x2="48" y2="39" stroke="#4AADFF" stroke-width="1" opacity="0.6"/><line x1="48" y1="39" x2="60" y2="30" stroke="#4AADFF" stroke-width="1" opacity="0.6"/><ellipse cx="48" cy="44" rx="8" ry="5" fill="white" opacity="0.22" transform="rotate(-25 48 44)"/></svg>` },
       { emoji: '🍫', name: 'World Chocolate Day', date: '2026-07-07', note: null, svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g6')}${GRID}<path d="M20 42 L60 30 L100 42 L100 82 L60 94 L20 82Z" fill="url(#g6)"/><path d="M60 30 L100 42 L100 82 L60 94Z" fill="#1a6fcc" opacity="0.5"/><path d="M60 30 L100 42 L60 54 L20 42Z" fill="#8de0ff" opacity="0.25"/><line x1="20" y1="55" x2="100" y2="55" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="20" y1="68" x2="100" y2="68" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="20" y1="81" x2="100" y2="81" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="40" y1="37" x2="40" y2="94" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="60" y1="30" x2="60" y2="94" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><line x1="80" y1="37" x2="80" y2="88" stroke="#4AADFF" stroke-width="1.2" opacity="0.5"/><ellipse cx="38" cy="42" rx="9" ry="5" fill="white" opacity="0.2" transform="rotate(-15 38 42)"/></svg>` },
       { emoji: '🎃', name: 'Halloween', date: '2026-10-31', note: null, svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g0')}${GRID}<ellipse cx="37" cy="76" rx="19" ry="24" fill="url(#g0)" opacity="0.75"/><ellipse cx="83" cy="76" rx="19" ry="24" fill="url(#g0)" opacity="0.75"/><ellipse cx="60" cy="73" rx="26" ry="31" fill="url(#g0)"/><path d="M57 44 Q62 33 71 29" stroke="#4AADFF" stroke-width="4" fill="none" stroke-linecap="round"/><polygon points="51,68 46,59 57,59" fill="#041e42" opacity="0.7"/><polygon points="69,68 74,59 63,59" fill="#041e42" opacity="0.7"/><path d="M49 78 Q60 87 71 78" stroke="#041e42" stroke-width="2.5" fill="none" opacity="0.7"/><ellipse cx="50" cy="59" rx="8" ry="5" fill="white" opacity="0.2" transform="rotate(-20 50 59)"/></svg>` },
       { emoji: '💀', name: 'Día de Muertos', date: '2026-11-02', note: null, svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">${GR('g1')}${GRID}<ellipse cx="60" cy="54" rx="33" ry="36" fill="url(#g1)"/><rect x="38" y="78" width="44" height="24" rx="11" fill="url(#g1)"/><ellipse cx="47" cy="52" rx="11" ry="12" fill="#041e42" opacity="0.75"/><ellipse cx="73" cy="52" rx="11" ry="12" fill="#041e42" opacity="0.75"/><ellipse cx="43" cy="48" rx="3" ry="2.5" fill="white" opacity="0.3"/><ellipse cx="69" cy="48" rx="3" ry="2.5" fill="white" opacity="0.3"/><path d="M55 67 L60 73 L65 67" fill="#041e42" opacity="0.6"/><line x1="48" y1="80" x2="48" y2="97" stroke="#041e42" stroke-width="2.5" opacity="0.55"/><line x1="56" y1="80" x2="56" y2="99" stroke="#041e42" stroke-width="2.5" opacity="0.55"/><line x1="64" y1="80" x2="64" y2="99" stroke="#041e42" stroke-width="2.5" opacity="0.55"/><line x1="72" y1="80" x2="72" y2="97" stroke="#041e42" stroke-width="2.5" opacity="0.55"/><circle cx="60" cy="22" r="5" fill="#4AADFF" opacity="0.6"/><circle cx="47" cy="26" r="3.5" fill="#4AADFF" opacity="0.45"/><circle cx="73" cy="26" r="3.5" fill="#4AADFF" opacity="0.45"/><ellipse cx="49" cy="42" rx="9" ry="5" fill="white" opacity="0.18" transform="rotate(-20 49 42)"/></svg>` },
@@ -807,7 +839,7 @@
       { emoji: '💐', name: "Mother's Day", date: '2027-05-10', note: 'May 10 Mexico · 2nd Sunday May EU & USA', svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><defs><radialGradient id="g5" cx="35%" cy="28%" r="70%"><stop offset="0%" stop-color="#8de0ff"/><stop offset="50%" stop-color="#4AADFF"/><stop offset="100%" stop-color="#062a5e"/></radialGradient><radialGradient id="g5b" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#a0d8ff"/><stop offset="100%" stop-color="#1a6fcc"/></radialGradient></defs>${GRID}<ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(0 60 62)"/><ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(72 60 62)"/><ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(144 60 62)"/><ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(216 60 62)"/><ellipse cx="60" cy="38" rx="14" ry="22" fill="url(#g5)" opacity="0.9" transform="rotate(288 60 62)"/><circle cx="60" cy="62" r="17" fill="url(#g5b)"/><ellipse cx="55" cy="57" rx="5" ry="3.5" fill="white" opacity="0.3" transform="rotate(-20 55 57)"/></svg>` },
     ];
 
-    const TRADITIONAL_DAYS = 40;
+    const TRADITIONAL_DAYS = 120;
     const RV_DAYS = 8;
 
     function parseDate(str) {
@@ -944,7 +976,7 @@
         document.getElementById('rv-hero-num').textContent = rvDaysLeft;
         document.getElementById('rv-hero-label').textContent = 'days left to start';
         document.getElementById('rv-hero-sub').textContent = `You can start as late as ${formatDate(rvDeadline)}`;
-        document.getElementById('verdict-rv').textContent = '✅ You still have time';
+        document.getElementById('verdict-rv').textContent = "✅ You're in time — we can design it for you";
       }
 
       // Dynamic message
@@ -958,13 +990,13 @@
       } else if (daysLeft <= 59) {
         msg = 'Time is running short with traditional methods — but Real Volume can still get you there.';
       } else {
-        msg = "You're in great shape. There's still plenty of time to launch a stunning collection.";
+        msg = "You're in great shape. There's still plenty of time to design a stunning collection.";
       }
       document.getElementById('res-message').textContent = msg;
 
       // CTA
-      document.getElementById('cta-text').textContent = `Start your ${s.name} collection`;
-      const waText = encodeURIComponent(`Hi! I want to launch a ${s.name} collection. There are ${Math.max(0, daysLeft)} days left. Can we talk?`);
+      document.getElementById('cta-text').textContent = `Book my ${s.name} design today`;
+      const waText = encodeURIComponent(`Hi! I want to design a ${s.name} collection. Can we talk?`);
       document.getElementById('cta-btn').href = `https://wa.me/5491130006749?text=${waText}`;
 
       // Reveal results
