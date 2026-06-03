@@ -933,6 +933,10 @@
       const tradMissed = tradDeadline < now;
       const tradDaysLeft = diffDays(tradDeadline, now);
 
+      const tlTrad = document.getElementById('tl-traditional');
+      tlTrad.classList.toggle('bad', tradMissed || daysLeft <= 0);
+      tlTrad.classList.toggle('good', !tradMissed && daysLeft > 0);
+
       document.getElementById('bar-trad').style.width = '0';
       setTimeout(() => {
         document.getElementById('bar-trad').style.width = tradMissed ? '100%' : barWidth(daysLeft, TRADITIONAL_DAYS);
@@ -959,6 +963,10 @@
       const rvDeadline = new Date(target);
       rvDeadline.setDate(rvDeadline.getDate() - RV_DAYS);
       const rvMissed = rvDeadline < now;
+
+      const tlRv = document.getElementById('tl-rv');
+      tlRv.classList.toggle('bad', rvMissed || daysLeft <= 0);
+      tlRv.classList.toggle('good', !rvMissed && daysLeft > 0);
 
       document.getElementById('bar-rv').style.width = '0';
       setTimeout(() => {
